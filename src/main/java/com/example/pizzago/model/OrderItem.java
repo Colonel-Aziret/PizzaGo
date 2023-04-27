@@ -1,8 +1,13 @@
 package com.example.pizzago.model;
 
-import jakarta.persistence.*;
+import javax.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
 
 @Entity
+@Table(name = "order_items")
+@Getter
+@Setter
 public class OrderItem {
 
     @Id
@@ -25,6 +30,5 @@ public class OrderItem {
         this.quantity = quantity;
     }
 
-    // геттеры и сеттеры для всех полей
 
 }
