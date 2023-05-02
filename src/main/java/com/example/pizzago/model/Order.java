@@ -1,9 +1,12 @@
 package com.example.pizzago.model;
 
-import javax.persistence.*;
+
+import com.example.pizzago.enums.OrderStatus;
 import lombok.Getter;
 import lombok.Setter;
-
+import javax.persistence.*;
+import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -16,22 +19,26 @@ public class Order {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String customerName;
+    @ManyToOne
+    @JoinColumn(name = "user_id", nullable = false)
+    private User user;
 
-    private String customerAddress;
+    @Column(name = "address_id", nullable = false)
+    private String address;
 
-    @OneToMany(mappedBy = "order", cascade = CascadeType.ALL)
-    private List<OrderItem> orderItems;
+    @Column(name = "total_price", nullable = false)
+    private BigDecimal totalPrice;
 
-    public Order() {
-    }
+    @Column(name = "status", nullable = false)
+    @Enumerated(EnumType.STRING)
+    private OrderStatus status;
 
-    public Order(String customerName, String customerAddress, List<OrderItem> orderItems) {
-        this.customerName = customerName;
-        this.customerAddress = customerAddress;
-        this.orderItems = orderItems;
-    }
+    @OneToMany(mappedBy = "order")
+    private List<OrderItem> items = new ArrayList<>();
+
 }
+
+
 
 
 

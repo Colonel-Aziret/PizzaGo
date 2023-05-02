@@ -1,8 +1,11 @@
 package com.example.pizzago.model;
 
 import javax.persistence.*;
+
 import lombok.Getter;
 import lombok.Setter;
+
+import java.math.BigDecimal;
 
 @Entity
 @Table(name = "order_items")
@@ -15,20 +18,17 @@ public class OrderItem {
     private Long id;
 
     @ManyToOne
+    @JoinColumn(name = "order_id", nullable = false)
     private Order order;
 
     @ManyToOne
+    @JoinColumn(name = "pizza_id", nullable = false)
     private Pizza pizza;
 
-    private int quantity;
+    @Column(name = "quantity", nullable = false)
+    private Integer quantity;
 
-    public OrderItem() {}
-
-    public OrderItem(Order order, Pizza pizza, int quantity) {
-        this.order = order;
-        this.pizza = pizza;
-        this.quantity = quantity;
-    }
-
+    @Column(name = "price", nullable = false)
+    private BigDecimal price;
 
 }

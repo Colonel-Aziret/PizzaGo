@@ -2,7 +2,6 @@ package com.example.pizzago.controller;
 
 import com.example.pizzago.model.Order;
 import com.example.pizzago.repository.PizzaRepository;
-import com.example.pizzago.service.OrderService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;

@@ -1,28 +1,32 @@
 package com.example.pizzago.model;
 
+import lombok.Getter;
+import lombok.Setter;
+
 import javax.persistence.*;
-import lombok.*;
+import java.math.BigDecimal;
 
 @Entity
-@Table(name = "pizza")
+@Table(name = "pizzas")
 @Getter
 @Setter
 public class Pizza {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(name = "name", nullable = false)
     private String name;
 
+    @Column(name = "description", nullable = false)
     private String description;
 
-    private double price;
+    @Column(name = "price", nullable = false)
+    private BigDecimal price;
 
-    public Pizza() {}
+    @Column(name = "image_url", nullable = false)
+    private String imageUrl;
 
-    public Pizza(String name, String description, double price) {
-        this.name = name;
-        this.description = description;
-        this.price = price;
-    }
 }
+
