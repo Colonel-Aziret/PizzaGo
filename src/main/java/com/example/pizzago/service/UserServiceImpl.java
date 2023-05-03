@@ -7,10 +7,9 @@ import com.example.pizzago.exceptions.UserNotFoundException;
 import com.example.pizzago.model.User;
 import com.example.pizzago.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
-
-import java.util.Optional;
 
 public class UserServiceImpl implements UserService {
 
@@ -61,5 +60,15 @@ public class UserServiceImpl implements UserService {
     public User getUserByEmail(String email) {
         return (User) userRepository.findByEmail(email)
                 .orElseThrow(() -> new UsernameNotFoundException("User not found with email: " + email));
+    }
+
+    @Override
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        User user = (User) userRepository.findByEmail(username).orElseThrow(() -> new UsernameNotFoundException("User not found with email: " + username));
+        return org.springframework.security.core.userdetails.User.builder()
+                .username(user.getEmail())
+                .password(user.getPassword())
+                .roles(user.getRole().toString())
+                .build();
     }
 }

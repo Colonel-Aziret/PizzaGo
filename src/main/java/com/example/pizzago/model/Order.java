@@ -23,8 +23,8 @@ public class Order {
     @JoinColumn(name = "user_id", nullable = false)
     private User user;
 
-    @Column(name = "address_id", nullable = false)
-    private String address;
+    @OneToMany(mappedBy = "order", cascade = CascadeType.ALL)
+    private List<Address> addresses;
 
     @Column(name = "total_price", nullable = false)
     private BigDecimal totalPrice;

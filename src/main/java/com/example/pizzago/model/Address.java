@@ -30,7 +30,8 @@ public class Address {
     @Column(name = "zip_code", nullable = false)
     private String zipCode;
 
-    @OneToOne(mappedBy = "address")
+    @ManyToOne(fetch = FetchType.EAGER, optional = false)
+    @JoinColumn(name = "order_id", nullable = false)
     private Order order;
 
     @ManyToOne
