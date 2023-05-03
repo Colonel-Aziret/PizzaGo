@@ -20,8 +20,6 @@ EmailSender (you can reset your password if you forgot it)
 
 ![db-image](https://user-images.githubusercontent.com/75328752/236048278-4c77bbd1-a7fe-4bcc-8b7c-319ac616dc26.png)
 
-Here we can view the menu and order pizza delivery
-
 # To get started, you need to sign up
 
 with login, email and password
