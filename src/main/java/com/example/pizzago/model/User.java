@@ -1,10 +1,9 @@
 package com.example.pizzago.model;
 
 import com.example.pizzago.enums.Role;
-import lombok.AllArgsConstructor;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -14,59 +13,31 @@ import java.util.List;
 @Table(name = "users")
 @Getter
 @Setter
-@NoArgsConstructor
-@AllArgsConstructor
 public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "username", unique = true, nullable = false)
-    private String username;
-
-    @Column(name = "password", nullable = false)
-    private String password;
+    @Column(name = "login", unique = true, nullable = false)
+    private String login;
 
     @Column(name = "email", unique = true, nullable = false)
     private String email;
 
+    @Column(name = "password", nullable = false)
+    private String password;
+
     @Enumerated(EnumType.STRING)
-    @Column(name = "role", nullable = false)
+    @Column(name = "role")
     private Role role;
 
     @OneToMany(mappedBy = "user")
     private List<Order> orders = new ArrayList<>();
 
-    public static Builder builder() {
-        return new Builder();
+    public User(String login, String password, List<SimpleGrantedAuthority> authorities) {
     }
 
-    public static class Builder {
-        private final User user = new User();
-
-        public Builder username(String username) {
-            user.setUsername(username);
-            return this;
-        }
-
-        public Builder password(String password) {
-            user.setPassword(password);
-            return this;
-        }
-
-        public Builder email(String email) {
-            user.setEmail(email);
-            return this;
-        }
-
-        public Builder role(Role role) {
-            user.setRole(role);
-            return this;
-        }
-
-        public User build() {
-            return user;
-        }
+    public User() {
     }
 }

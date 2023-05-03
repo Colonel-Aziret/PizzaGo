@@ -1,53 +1,63 @@
 package com.example.pizzago.controller;
 
-import com.example.pizzago.exceptions.IncorrectPasswordException;
-import com.example.pizzago.exceptions.UserNotFoundException;
 import com.example.pizzago.model.User;
 import com.example.pizzago.service.UserService;
-import com.example.pizzago.service.UserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 public class UserController {
     @Autowired
-    private UserServiceImpl userService;
+    private UserService userService;
+
+    @Autowired
+    private PasswordEncoder bCryptPasswordEncoder;
 
     @GetMapping("/login")
-    public String login(Model model) {
-        model.addAttribute("user", new User());
-//        model.addAttribute("error", error != null);
+    public String login() {
         return "login";
     }
 
     @PostMapping("/login")
-    public String login(@RequestParam("email") String email, @RequestParam("password") String password) {
+    public String loginPage(@RequestParam(value = "error", required = false) String error,
+                                  @RequestParam(value = "logout", required = false) String logout) {
+
+        ModelAndView model = new ModelAndView();
+        if (error != null) {
+            model.addObject("error", "Incorrect login or password");
+            model.setViewName("/login");
+        }
+        if (logout != null) {
+            model.addObject("logout", "Logged out successfully.");
+            model.setViewName("/login");
+        }
+        return "redirect:/";
+    }
+
+    @GetMapping("/register")
+    public ModelAndView register() {
+        ModelAndView modelAndView = new ModelAndView("registration");
+        modelAndView.addObject("user", new User());
+        return modelAndView;
+    }
+
+
+    @PostMapping("/registration")
+    public String registration(@ModelAttribute(name = "user") User user) {
         try {
-            if (userServiceImpl.authenticateUser(email, password)) {
-                return "redirect:/dashboard";
-            } else {
-                return "redirect:/login?error=true";
-            }
-        } catch (UserNotFoundException | IncorrectPasswordException e) {
-            return "redirect:/login?error=true";
+            ModelAndView model = new ModelAndView();
+            this.userService.save(user);
+            return "login";
+        } catch (Exception e) {
+            return "registration";
         }
     }
 
-
-    @GetMapping("/register")
-    public String register(Model model) {
-        model.addAttribute("user", new User());
-        return "register";
-    }
-
-    @PostMapping("/register")
-    public String register(@ModelAttribute User user) {
-        userServiceImpl.registerUser(user);
-        return "redirect:/login";
+    @GetMapping("/adminMain")
+    public String adminMain() {
+        return "adminMain";
     }
 }

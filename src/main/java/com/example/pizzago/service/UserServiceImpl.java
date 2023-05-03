@@ -2,73 +2,77 @@ package com.example.pizzago.service;
 
 import com.example.pizzago.enums.Role;
 import com.example.pizzago.exceptions.IncorrectPasswordException;
-import com.example.pizzago.exceptions.UserAlreadyExistsException;
 import com.example.pizzago.exceptions.UserNotFoundException;
 import com.example.pizzago.model.User;
 import com.example.pizzago.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.stereotype.Service;
 
-public class UserServiceImpl implements UserService {
+import java.util.ArrayList;
+import java.util.List;
 
-    private final UserRepository userRepository;
-    private final PasswordEncoder passwordEncoder;
+@Service
+public class UserServiceImpl implements UserService, UserDetailsService {
 
     @Autowired
-    public UserServiceImpl(UserRepository userRepository, PasswordEncoder passwordEncoder) {
-        this.userRepository = userRepository;
-        this.passwordEncoder = passwordEncoder;
+    private UserRepository userRepository;
+
+    private BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
+
+    public User save(User user) {
+        user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
+        user.setRole(Role.USER);
+        return userRepository.save(user);
     }
+
+    public User findByLogin(String login) {
+        return userRepository.findByLogin(login);
+    }
+
+
+    @Override
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        User user = this.userRepository.findFirstByLogin(username);
+        if (user == null) {
+            throw new UsernameNotFoundException("User not found");
+        }
+        List<SimpleGrantedAuthority> authorities = new ArrayList<>();
+        authorities.add(new SimpleGrantedAuthority(user.getRole().name()));
+        return new org.springframework.security.core.userdetails.User(user.getLogin(), user.getPassword(), authorities);
+    }
+
+
+    public User getUserByAuthentication(Authentication authentication) {
+        if (authentication == null) {
+            return null;
+        }
+        String username = authentication.getName();
+        return userRepository.findFirstByLogin(username);
+    }
+
     @Override
     public User registerUser(User user) {
-        // Проверяем, есть ли пользователь уже в БД
-        if (userRepository.existsByEmail(user.getEmail())) {
-            throw new UserAlreadyExistsException("User with email " + user.getEmail() + " already exists");
-        }
-
-        // Хешируем пароль и сохраняем пользователя в БД
-        user.setRole(Role.CUSTOMER);
-        user.setPassword(passwordEncoder.encode(user.getPassword()));
-        return userRepository.save(user);
+        return null;
     }
 
     @Override
     public User login(String email, String password) {
-        // Ищем пользователя в БД по email
-        User user = (User) userRepository.findByEmail(email)
-                .orElseThrow(() -> new UserNotFoundException("User with email " + email + " not found"));
-
-        // Проверяем пароль
-        if (!passwordEncoder.matches(password, user.getPassword())) {
-            throw new IncorrectPasswordException("Incorrect password for user with email " + email);
-        }
-
-        // Возвращаем пользователя
-        return user;
+        return null;
     }
 
     @Override
     public boolean authenticateUser(String email, String password) throws UserNotFoundException, IncorrectPasswordException {
-        User user = (User) userRepository.findByEmail(email)
-                .orElseThrow(() -> new UserNotFoundException("User with email " + email + " not found"));
-        return passwordEncoder.matches(password, user.getPassword());
+        return false;
     }
 
     @Override
     public User getUserByEmail(String email) {
-        return (User) userRepository.findByEmail(email)
-                .orElseThrow(() -> new UsernameNotFoundException("User not found with email: " + email));
-    }
-
-    @Override
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        User user = (User) userRepository.findByEmail(username).orElseThrow(() -> new UsernameNotFoundException("User not found with email: " + username));
-        return org.springframework.security.core.userdetails.User.builder()
-                .username(user.getEmail())
-                .password(user.getPassword())
-                .roles(user.getRole().toString())
-                .build();
+        return null;
     }
 }

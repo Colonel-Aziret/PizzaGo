@@ -13,4 +13,6 @@ public interface UserService extends UserDetailsService {
     boolean authenticateUser(String email, String password) throws UserNotFoundException, IncorrectPasswordException;
 
     User getUserByEmail(String email);
+
+    User save(User user);
 }
