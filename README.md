@@ -2,7 +2,7 @@
 
 Final project
 
-Web application for ordering a delivery of <pizza>
+Web application for ordering a delivery of pizza
 
 # Technology stack:
 
