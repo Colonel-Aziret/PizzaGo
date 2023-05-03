@@ -37,7 +37,6 @@
         box-sizing: border-box;
     }
 
-    user agent stylesheet
     body {
         display: block;
         margin: 8px;
@@ -175,6 +174,7 @@
         margin-left: 100px;
         font-size: 35px;
         color: #1b5792;
+        text-align: center;
     }
 
     .col-md-3 {
@@ -236,6 +236,12 @@
         margin: auto;
     }
 
+    .center {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
 </style>
 <body>
 <header class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4 border-bottom">
@@ -243,13 +249,10 @@
         <img class="logo"
              src="https://upload.wikimedia.org/wikipedia/en/0/07/Ala-Too_International_University_Seal.png"
              width="70" height="50" alt="">
-        <p class="big-text">PizzaGo</p>
+        <div class="center">
+            <h1 class="logo">PizzaGo</h1>
+        </div>
     </a>
-
-    <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
-        <li><a href="/get_all_attraction" class="nav-link px-2 link-dark">Главная страница</a></li>
-    </ul>
-
     <div class="col-md-3 text-end">
         <a sec:authorize="isAnonymous()" class="sign-in" href="/login">Войти</a>
         <a sec:authorize="isAnonymous()" class="sign-up" href="/register">Зарегистрироваться</a>
