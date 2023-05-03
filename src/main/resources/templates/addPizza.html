@@ -31,7 +31,7 @@
     <!--===============================================================================================-->
 </head>
 <body>
-<form th:action="@{/save_order}" method="post" th:object="${address}">
+<form th:action="@{/save_pizza}" method="post" th:object="${pizza}">
     <section class="vh-100 bg-image"
              style="background-image: url('https://pibig.info/uploads/posts/2022-12/1669899877_3-pibig-info-p-krasivii-zadnii-fon-vkontakte-3.jpg');">
         <div class="mask d-flex align-items-center h-100 gradient-custom-3">
@@ -40,7 +40,7 @@
                     <div class="col-12 col-md-9 col-lg-7 col-xl-6">
                         <div class="card" style="border-radius: 15px;">
                             <div class="card-body p-5">
-                                <h2 class="text-uppercase text-center mb-5">Адрес</h2>
+                                <h2 class="text-uppercase text-center mb-5">Добавление пиццы</h2>
                                 <form>
                                     <div class="form-outline mb-4">
                                         <input th:value="${name}" type="text" name="name" autofocus required

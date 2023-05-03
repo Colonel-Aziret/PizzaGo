@@ -1,9 +1,10 @@
 <!DOCTYPE html>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org"
       xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
 <head>
-    <title>Add Pizza</title>
+    <title>Registration</title>
     <!-- CSS only -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
@@ -31,7 +32,19 @@
     <!--===============================================================================================-->
 </head>
 <body>
-<form th:action="@{/save_order}" method="post" th:object="${address}">
+
+<div hidden th:if="${param.error} !=null">
+    Данный логин уже используется
+</div>
+
+<!-- success message -->
+<div th:if="${param.success}">
+    <div class="alert alert-info">You've successfully registered
+        to our awesome app!</div>
+</div>
+
+<form th:action="@{/registration}" method="post" th:object="${user}">
+
     <section class="vh-100 bg-image"
              style="background-image: url('https://pibig.info/uploads/posts/2022-12/1669899877_3-pibig-info-p-krasivii-zadnii-fon-vkontakte-3.jpg');">
         <div class="mask d-flex align-items-center h-100 gradient-custom-3">
@@ -40,46 +53,43 @@
                     <div class="col-12 col-md-9 col-lg-7 col-xl-6">
                         <div class="card" style="border-radius: 15px;">
                             <div class="card-body p-5">
-                                <h2 class="text-uppercase text-center mb-5">Адрес</h2>
+                                <h2 class="text-uppercase text-center mb-5">Create an account</h2>
+
                                 <form>
+
                                     <div class="form-outline mb-4">
-                                        <input th:value="${name}" type="text" name="name" autofocus required
+                                        <input th:value="${login}" type="text" name="login" maxlength="30" autofocus required
                                                id="form3Example1cg"
                                                class="form-control form-control-lg"/>
-                                        <label class="form-label" for="form3Example1cg">Название пиццы:</label>
+                                        <label class="form-label" for="form3Example1cg">Login</label>
                                     </div>
 
                                     <div class="form-outline mb-4">
-                                        <input th:value="${description}" type="text" name="description"
-                                               id="form4Example1cg"
+                                        <input th:value="${email}" type="email" name="email" autofocus required
+                                               id="form3Example3cg"
                                                class="form-control form-control-lg"/>
-                                        <label class="form-label" for="form3Example1cg">Описание:</label>
+                                        <label class="form-label" for="form3Example3cg">Email</label>
                                     </div>
 
                                     <div class="form-outline mb-4">
-                                        <input th:value="${price}" type="text" name="price" autofocus required
-                                               id="form6Example1cg"
+                                        <input th:value="${password}" type="password" name="password" autofocus required
+                                               id="form3Example4cg"
                                                class="form-control form-control-lg"/>
-                                        <label class="form-label" for="form3Example1cg">Цена:</label>
-                                    </div>
-
-                                    <div class="form-outline mb-4">
-                                        <input th:value="${img}" type="url" name="img"
-                                               id="form5Example1cg"
-                                               class="form-control form-control-lg"/>
-                                        <label class="form-label" for="form3Example1cg">URL картинки:</label>
+                                        <label class="form-label" for="form3Example4cg">Password</label>
                                     </div>
 
                                     <div class="d-flex justify-content-center">
-                                        <button type="submit" value="Добавить"
+                                        <button type="submit" value="SIGN UP"
                                                 class="btn btn-success btn-block btn-lg gradient-custom-4 text-body">
-                                            Добавить
+                                            SIGN UP
                                         </button>
+
                                     </div>
-                                    <p class="text-center text-muted mt-5 mb-0" sec:authorize="hasAuthority('ADMIN')"><a
-                                            th:href="@{/adminMain}"
-                                            class="fw-bold text-body"><u>Отмена
-                                    </u></a></p>
+
+                                    <p class="text-center text-muted mt-5 mb-0">Have already an account? <a
+                                            th:href="@{/login}"
+                                            class="fw-bold text-body"><u>Login
+                                        here</u></a></p>
                                 </form>
                             </div>
                         </div>
