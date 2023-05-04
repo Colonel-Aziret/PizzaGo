@@ -14,6 +14,8 @@ Thymeleaf
 
 PostgreSQL
 
+BCryptPasswordEncoder
+
 EmailSender (you can reset your password if you forgot it)
 
 # There is database schema
