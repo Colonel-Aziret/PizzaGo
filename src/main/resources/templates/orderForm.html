@@ -43,31 +43,38 @@
                                 <h2 class="text-uppercase text-center mb-5">Адрес</h2>
                                 <form>
                                     <div class="form-outline mb-4">
-                                        <input th:value="${name}" type="text" name="name" autofocus required
+                                        <input th:value="${city}" type="text" name="city" autofocus required
                                                id="form3Example1cg"
                                                class="form-control form-control-lg"/>
                                         <label class="form-label" for="form3Example1cg">Город:</label>
                                     </div>
 
                                     <div class="form-outline mb-4">
-                                        <input th:value="${description}" type="text" name="description"
+                                        <input th:value="${street}" type="text" name="street"
                                                id="form4Example1cg"
                                                class="form-control form-control-lg"/>
                                         <label class="form-label" for="form3Example1cg">Улица:</label>
                                     </div>
 
                                     <div class="form-outline mb-4">
-                                        <input th:value="${price}" type="text" name="price" autofocus required
+                                        <input th:value="${houseNumber}" type="text" name="houseNumber" autofocus required
                                                id="form6Example1cg"
                                                class="form-control form-control-lg"/>
-                                        <label class="form-label" for="form3Example1cg">Номер телефона:</label>
+                                        <label class="form-label" for="form3Example1cg">Номер дома:</label>
+                                    </div>
+
+                                    <div class="form-outline mb-4">
+                                        <input th:value="${apartmentNumber}" type="text" name="apartmentNumber" autofocus required
+                                               id="form7Example1cg"
+                                               class="form-control form-control-lg"/>
+                                        <label class="form-label" for="form3Example1cg">Номер квартиры:</label>
                                     </div>
 
 
                                     <div class="d-flex justify-content-center">
                                         <button type="submit" value="Добавить"
                                                 class="btn btn-success btn-block btn-lg gradient-custom-4 text-body">
-                                            Добавить
+                                            Заказать
                                         </button>
                                     </div>
                                     <p class="text-center text-muted mt-5 mb-0" sec:authorize="hasAuthority('ADMIN')"><a

@@ -15,6 +15,9 @@ public class Address {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(name = "city", nullable = false)
+    private String city;
+
     @Column(name = "street", nullable = false)
     private String street;
 
@@ -23,12 +26,6 @@ public class Address {
 
     @Column(name = "apartment_number")
     private String apartmentNumber;
-
-    @Column(name = "city", nullable = false)
-    private String city;
-
-    @Column(name = "zip_code", nullable = false)
-    private String zipCode;
 
     @ManyToOne(fetch = FetchType.EAGER, optional = false)
     @JoinColumn(name = "order_id", nullable = false)

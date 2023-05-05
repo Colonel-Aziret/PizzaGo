@@ -1,6 +1,11 @@
 package com.example.pizzago.config;
 
+import com.example.pizzago.enums.Role;
+import com.example.pizzago.model.User;
+import com.example.pizzago.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.security.oauth2.client.EnableOAuth2Sso;
+import org.springframework.boot.autoconfigure.security.oauth2.resource.PrincipalExtractor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
@@ -16,6 +21,7 @@ import javax.sql.DataSource;
 
 @Configuration
 @EnableWebSecurity
+@EnableOAuth2Sso
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
@@ -57,5 +63,26 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/resources/**", "/templates/**", "/static/**", "registration");
     }
 
+    @Bean
+    public PrincipalExtractor principalExtractor(UserRepository userRepository) {
+            return map -> {
+                Long id = (Long) map.get("sub");
+
+            User user = userRepository.findById(id).orElseGet(() -> {
+                User newUser = new User();
+
+                newUser.setId((id));
+                newUser.setLogin((String) map.get("login"));
+                newUser.setEmail((String) map.get("email"));
+                newUser.setPassword("12345");
+                newUser.setOrders(null);
+                newUser.setRole(Role.USER);
+
+                return newUser;
+            });
+
+            return userRepository.save(user);
+        };
+    }
 
 }

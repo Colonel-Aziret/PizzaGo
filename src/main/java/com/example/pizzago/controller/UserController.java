@@ -37,6 +37,11 @@ public class UserController {
         return "redirect:/";
     }
 
+    @GetMapping("/loginGoogle")
+    public String loginGoogle() {
+        return "loginGoogle";
+    }
+
     @GetMapping("/register")
     public ModelAndView register() {
         ModelAndView modelAndView = new ModelAndView("registration");
