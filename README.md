@@ -10,6 +10,8 @@ Java
 
 Spring Boot, Spring Security, Spring Data Jpa
 
+OAuth 2
+
 Thymeleaf
 
 PostgreSQL
@@ -28,9 +30,13 @@ with login, email and password
 
 ![image](https://user-images.githubusercontent.com/75328752/236045920-87adf574-e3ec-483e-aabf-1569b7d912cc.png)
 
+Also, you can sign in with your google account
+
+![image](https://user-images.githubusercontent.com/75328752/236510277-44d425e0-6a98-4779-a802-a5ac89e1b03f.png)
+
 Then you will have to log in again 
 
-![image](https://user-images.githubusercontent.com/75328752/236046217-b26d37ef-4669-40cf-8eed-a62165fe4cdc.png)
+![image](https://user-images.githubusercontent.com/75328752/236511129-8962ee47-45e7-4d87-8a20-13d90a05d533.png)
 
 And you will be taken to the main page
 
