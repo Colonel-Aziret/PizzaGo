@@ -28,7 +28,7 @@ EmailSender (you can reset your password if you forgot it)
 
 with login, email and password
 
-![image](https://user-images.githubusercontent.com/75328752/236045920-87adf574-e3ec-483e-aabf-1569b7d912cc.png)
+![image](https://user-images.githubusercontent.com/75328752/236511616-22c76c9b-0d92-4264-84c4-721d856903f5.png)
 
 Also, you can sign in with your google account
 
@@ -36,7 +36,7 @@ Also, you can sign in with your google account
 
 Then you will have to log in again 
 
-![image](https://user-images.githubusercontent.com/75328752/236511129-8962ee47-45e7-4d87-8a20-13d90a05d533.png)
+![image](https://user-images.githubusercontent.com/75328752/236511738-ecf69eb7-7eac-4d4c-8a7e-cf9724c039f2.png)
 
 And you will be taken to the main page
 
