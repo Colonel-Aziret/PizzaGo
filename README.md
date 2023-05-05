@@ -22,6 +22,8 @@ EmailSender (you can reset your password if you forgot it)
 
 # There is database schema
 
+![image](https://user-images.githubusercontent.com/75328752/236513186-b62c4d36-a872-4d75-9b71-e5734ffa22b0.png)
+
 ![db-image](https://user-images.githubusercontent.com/75328752/236048278-4c77bbd1-a7fe-4bcc-8b7c-319ac616dc26.png)
 
 # To get started, you need to sign up
@@ -50,7 +52,7 @@ This is your shopping cart and added items
 
 Then you fill out a simple form and that's it
 
-![image](https://user-images.githubusercontent.com/75328752/236047566-66de23df-2fce-4a08-876a-cf58a0c4d568.png)
+![image](https://user-images.githubusercontent.com/75328752/236512593-fb8c389f-dc5a-4e0c-8160-31a7118b8079.png)
 
 
 
