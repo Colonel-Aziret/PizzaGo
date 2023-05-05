@@ -22,9 +22,7 @@ EmailSender (you can reset your password if you forgot it)
 
 # There is database schema
 
-![image](https://user-images.githubusercontent.com/75328752/236513186-b62c4d36-a872-4d75-9b71-e5734ffa22b0.png)
-
-![db-image](https://user-images.githubusercontent.com/75328752/236048278-4c77bbd1-a7fe-4bcc-8b7c-319ac616dc26.png)
+![db-image](https://user-images.githubusercontent.com/75328752/236513448-9ad2797d-3b26-448c-ad5b-825263a653f3.png)
 
 # To get started, you need to sign up
 
